@@ -83,7 +83,12 @@ const Quiz = () => {
           )}
           <div className="text-center mt-4">
             {showAnswer ? (
-              <Button onClick={handleClickNextPokemon}>次の問題</Button>
+              <>
+                <Button onClick={handleClickNextPokemon}>次の問題</Button>
+                <div className="text-center">
+                  <Button color="black" className="mt-8" onClick={() => push('/result')}>クイズを終了する</Button>
+                </div>
+              </>
             ) : (
               <Button onClick={handleClickShowAnswer}>答えを見る</Button>
             )}
@@ -91,9 +96,6 @@ const Quiz = () => {
           {/* {stockIds.map((id) => (
             <p key={id} onClick={() => setQueryId(id)}>{id}</p>
           ))} */}
-          <div className="text-center">
-            <Button color="black" className="mt-8" onClick={() => push('/result')}>クイズを終了する</Button>
-          </div>
         </div>
       )}
     </div>
