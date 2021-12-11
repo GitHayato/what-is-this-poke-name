@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
-import { useAppSelector } from "../app/hooks"
-import { selectCorrectIds, selectIncorrectIds, selectStockIds } from "../app/slice/stockIdSlice"
+import React from "react"
+import { useAppDispatch, useAppSelector } from "../app/hooks"
+import { stockIdSlice, selectCorrectIds, selectIncorrectIds, selectStockIds } from "../app/slice/stockIdSlice"
 import { Button } from "../components/Button"
 import { PokeData } from "../utils/pokeData"
 
@@ -9,8 +10,15 @@ const Result = () => {
   const stockIds = useAppSelector(selectStockIds)
   const correctIds = useAppSelector(selectCorrectIds)
   const incorrectIds = useAppSelector(selectIncorrectIds)
+  const dispatch = useAppDispatch()
+  const { resetAnswers } = stockIdSlice.actions
 
   const { push } = useRouter()
+
+  const handleClickToHome = React.useCallback(() => {
+    dispatch(resetAnswers())
+    push("/")
+  }, [dispatch, push])
 
   return (
     <div className="mt-10 px-8">
@@ -45,7 +53,7 @@ const Result = () => {
         </div>
       </div>
       <div className="text-center mt-8">
-        <Button color="black" onClick={() => push('/')}>Homeに戻る</Button>
+        <Button color="black" onClick={handleClickToHome}>Homeに戻る</Button>
       </div>
     </div>
   )
