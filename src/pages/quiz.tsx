@@ -93,9 +93,6 @@ const Quiz = () => {
               <Button onClick={handleClickShowAnswer}>答えを見る</Button>
             )}
           </div>
-          {/* {stockIds.map((id) => (
-            <p key={id} onClick={() => setQueryId(id)}>{id}</p>
-          ))} */}
         </div>
       )}
     </div>
