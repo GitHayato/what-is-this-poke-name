@@ -92,7 +92,7 @@ const Quiz = () => {
             <p key={id} onClick={() => setQueryId(id)}>{id}</p>
           ))} */}
           <div className="text-center">
-            <Button color="black" className="mt-8" onClick={() => push('/')}>クイズを終了する</Button>
+            <Button color="black" className="mt-8" onClick={() => push('/result')}>クイズを終了する</Button>
           </div>
         </div>
       )}
