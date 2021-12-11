@@ -27,10 +27,15 @@ export const stockIdSlice = createSlice({
     incorrectAnswer: (state, action: PayloadAction<string>) => {
       state.incorrectIds.push(action.payload)
     },
+    resetAnswers: (state) => {
+      state.stockIds = []
+      state.correctIds = []
+      state.incorrectIds = []
+    }
   },
 })
 
-export const { pokemonId, correctAnswer, incorrectAnswer } = stockIdSlice.actions
+export const { pokemonId, correctAnswer, incorrectAnswer, resetAnswers } = stockIdSlice.actions
 
 export const selectStockIds = (state: RootState) => state.stockIds.stockIds
 export const selectCorrectIds = (state: RootState) => state.stockIds.correctIds
