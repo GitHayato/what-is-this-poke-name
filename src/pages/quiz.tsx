@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
+import toast from 'react-hot-toast'
 
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { useGetPokemonByIdQuery } from '../app/queries/pokeApi'
@@ -13,9 +14,10 @@ import { useRandom } from '../hooks/useRandom'
 const Quiz = () => {
   const [queryId, setQueryId] = React.useState('')
   const [showAnswer, setShowAnswer] = React.useState(false)
+  const [userPokemonName, setUserPokemonName] = React.useState('')
 
   const stockIds = useAppSelector(selectStockIds)
-  const { pokemonId } = stockIdSlice.actions
+  const { pokemonId, correctAnswer, incorrectAnswer } = stockIdSlice.actions
   const dispatch = useAppDispatch()
   const { findJpName } = useFindJpName()
   const { push } = useRouter()
@@ -37,13 +39,25 @@ const Quiz = () => {
     dispatchPokemonId()
     refetchPokemonData()
     setShowAnswer(false)
+    setUserPokemonName('')
   }, [dispatchPokemonId, refetchPokemonData])
 
   const handleClickShowAnswer = React.useCallback(() => {
     setShowAnswer(true)
-  }, [])
+    if (jpPokemonName === userPokemonName) {
+      console.log('success')
+      dispatch(correctAnswer(queryId))
+      toast.success('正解です！')
+    } else {
+      console.log('incorrect')
+      dispatch(incorrectAnswer(queryId))
+      toast.error('不正解です！')
+    }
+  }, [dispatch, queryId, jpPokemonName, userPokemonName])
 
-  console.log(pokemonData)
+  const handleChangeIsCorrect = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserPokemonName(e.target.value)
+  },[])
 
   return (
     <div className="flex justify-center">
@@ -60,7 +74,12 @@ const Quiz = () => {
           {showAnswer ? (
             <h1 className="font-bold text-xl text-center">{jpPokemonName}</h1>
           ) : (
-            <input placeholder="答えを入力してください" className="w-full border-2 px-2 py-1 rounded-md" />
+            <input
+              value={userPokemonName}
+              placeholder="答えを入力してください"
+              className="w-full border-2 px-2 py-1 rounded-md"
+              onChange={handleChangeIsCorrect}
+            />
           )}
           <div className="text-center mt-4">
             {showAnswer ? (
