@@ -21,7 +21,7 @@ const Result = () => {
   }, [dispatch, push])
 
   return (
-    <div className="mt-10 px-8">
+    <div className="mt-10 px-8 max-w-3xl mx-auto">
       <h1 className="font-bold text-xl">クイズ結果</h1>
       <div>
         <div className="my-4">
