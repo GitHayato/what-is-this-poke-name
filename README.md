@@ -1,23 +1,17 @@
-# Redux Toolkit TypeScript Example
+# 概要
+URL：https://pokename.vercel.app/  
+アプリ名：What is this pokemon name?  
+内容：ポケモンの英名から日本語名を当てるクイズゲーム。  
+期間：7時間
 
-This example shows how to integrate Next.js with [Redux Toolkit](https://redux-toolkit.js.org).
+# 使用技術
+| 技術 | 名 | 選定理由 |
+| --- | --- | --- |
+| 言語 | TypeScript | 最も描きなれている言語。静的に型を指定できるため、アプリケーションが肥大化した際に安全に開発を行える。|
+| ライブラリ/フレームワーク | Next.js | ファイルパスルーティングを用いて素早く開発を行える。|
+| CSS | TailwindCSS | ファイルサイズも小さく、素早く開発を行える。|
+| 状態管理/キャッシュ管理 | Redux Toolkit / RTK Query | このライブラリの学習をするために本アプリを開発。|
 
-The **Redux Toolkit** is a standardized way to write Redux logic (create actions and reducers, setup the store with some default middlewares like redux devtools extension). This example demonstrates each of these features with Next.js
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-redux&project-name=with-redux&repository-name=with-redux)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-redux with-redux-app
-# or
-yarn create next-app --example with-redux with-redux-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+# API, 使用データ
+- [PokeAPI](https://pokeapi.co/)：豊富なデータ量のAPIを公開。
+- [pokemon.json](https://github.com/fanzeyi/pokemon.json/blob/master/pokedex.json)：日本語名を含むjsonファイルを公開。
