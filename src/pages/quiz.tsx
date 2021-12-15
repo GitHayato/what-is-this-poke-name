@@ -33,7 +33,7 @@ const Quiz = () => {
   }, [])
 
   const { data: pokemonData, refetch: refetchPokemonData, isFetching } = useGetPokemonByIdQuery(queryId)
-  const jpPokemonName = findJpName(queryId)
+  const { jpName, type } = findJpName(queryId)
 
   const handleClickNextPokemon = React.useCallback(() => {
     dispatchPokemonId()
@@ -44,7 +44,7 @@ const Quiz = () => {
 
   const handleClickShowAnswer = React.useCallback(() => {
     setShowAnswer(true)
-    if (jpPokemonName === userPokemonName) {
+    if (jpName === userPokemonName) {
       console.log('success')
       dispatch(correctAnswer(queryId))
       toast.success('正解です！')
@@ -53,7 +53,7 @@ const Quiz = () => {
       dispatch(incorrectAnswer(queryId))
       toast.error('不正解です！')
     }
-  }, [dispatch, queryId, jpPokemonName, userPokemonName])
+  }, [dispatch, queryId, jpName, userPokemonName])
 
   const handleChangeIsCorrect = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUserPokemonName(e.target.value)
@@ -72,14 +72,26 @@ const Quiz = () => {
             )}
           <h1 className="font-bold text-xl text-center my-2">英名：{pokemonData.name}</h1>
           {showAnswer ? (
-            <h1 className="font-bold text-xl text-center">{jpPokemonName}</h1>
+            <h1 className="font-bold text-xl text-center">{jpName}</h1>
           ) : (
-            <input
-              value={userPokemonName}
-              placeholder="答えを入力してください"
-              className="w-full border-2 px-2 py-1 rounded-md"
-              onChange={handleChangeIsCorrect}
-            />
+            <>
+              <input
+                value={userPokemonName}
+                placeholder="答えを入力してください"
+                className="w-full border-2 px-2 py-1 rounded-md"
+                onChange={handleChangeIsCorrect}
+              />
+              <div className="mt-2">
+                <p>ヒント:</p>
+                {type.map(t => (
+                  type.length === 1 ? (
+                    <p>{type}</p>
+                  ) : (
+                    <p>{t}, </p>
+                  )
+                ))}
+              </div>
+            </>
           )}
           <div className="text-center mt-4">
             {showAnswer ? (
