@@ -5,8 +5,9 @@ export const useFindJpName = () => {
     const numberId = Number(id)
     const data = PokeData[numberId - 1]
     const jpName = data?.name.japanese
+    const type = data?.type
 
-    return jpName
+    return { jpName, type }
   }
   return { findJpName }
 }
